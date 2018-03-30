@@ -1,28 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const controller = require('./controller');
+
 const app = express();
 
 app.use( bodyParser.json() );
 
-app.get('/api/stuff', (req, res) => { 
+app.get('/api/games', controller.read)
 
-});  
+app.post('/api/games', controller.create);  
 
-app.post('/api/stuff', (req, res) => { 
+app.put('/api/games/:id', controller.update);  
 
-});  
-
-app.put('/api/stuff/:id', (req, res) => { 
-
-});  
-
-app.delete('/api/stuff/:id', (req, res) => { 
-
-});
+app.delete('/api/games/:id', controller.delete);
 
 const port = 3005;
 app.listen(port, () => {console.log(`Malicious marketers are listening on port ${port}`)})
 
-// app.get('/api/stuff', (req, res) => {
-//     res.status(200).send(stuff)
-// })

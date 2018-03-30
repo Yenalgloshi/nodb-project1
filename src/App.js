@@ -9,19 +9,20 @@ class App extends Component {
 
     this.state = {
       someArray: [],
-      baseUrl:''
+      apiUrl:'https://bgg-json.azurewebsites.net/collection/edwalter'
     }
   }
 
-    componentDidMount(){
-      // axios.get('/api/stuff').then(res => {
-      //   // do stuff with res.data
-      // })
-    }
+componentDidMount(){
+  axios.get('/api/games').then(res => {
+    console.log(res);
+  })
+}
 
+   
     
 
-  render() {
+render() {
     return (
       <div className="App">
         
