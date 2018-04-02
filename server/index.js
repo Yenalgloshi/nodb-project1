@@ -7,11 +7,8 @@ const app = express();
 app.use( bodyParser.json() );
 
 app.get('/api/games', controller.read)
-
 app.post('/api/games', controller.create);  
-
 app.put('/api/games/:id', controller.update);  
-
 app.delete('/api/games/:id', controller.delete);
 
 const port = 3005;

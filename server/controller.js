@@ -1,15 +1,37 @@
 const axios = require('axios');
-let gamesList = [];
+let allGames = [];
 let id = [];
 
 
 module.exports = { 
     read: ( req, res ) => { 
       axios.get('https://bgg-json.azurewebsites.net/collection/edwalter').then(response => {
-        gamesList = response.data}).then(response => {
-        res.send(gamesList)
+        allGames = response.data}).then(response => {
+        res.send(allGames)
       })
     }, 
+
+    filter: (req, res) => {
+      let copy = allGames.slice()
+  
+      if(req.query.playingTime){
+        copy = copy.filter((allGames) => {
+          return allGames.playingTime <= req.query.playingTime
+        })
+      }
+      
+      if(req.query.players){
+        copy = copy.filter((allGames) => {
+          return allGames.minPlayers <= req.query.players && allGames.maxPlayers >= req.query.players
+        })
+      }
+      
+      if(req.query.averageRating){
+        copy = copy.filter((allGames) => {
+          return allGames.averageRating >= req.query.averageRating
+    })
+  }
+    },
     
     create: ( req, res ) => { 
     
