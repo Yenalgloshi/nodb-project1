@@ -7,7 +7,7 @@ const app = express();
 app.use( bodyParser.json() );
 
 app.get('/api/games', controller.read)
-app.post('/api/games', controller.create);  
+app.post('/api/games', controller.filter);  
 app.put('/api/games/:id', controller.update);  
 app.delete('/api/games/:id', controller.delete);
 

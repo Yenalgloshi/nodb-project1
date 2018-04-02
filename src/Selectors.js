@@ -6,31 +6,64 @@ class Selectors extends Component{
         super()
 
         this.state = {
-            filterValues: {
                 playingTime: "",
                 numOfPlayers: "",
-                rating: ""
-            }
+                rating: "",
+                gamesToDisplay: []
         }
+        this.getMyGameList = this.getMyGameList.bind(this)
     }
 
     timeFilter(){
         let timeVal = this.refs.selectedPlayTime.value
-        this.setState({playingTime:value})
+
+        this.setState({playingTime:timeVal})
     }
 
     numPlyrFilter(){
         let numPVal = this.refs.selectedNumPlyrs.value
-        this.setState({numOfPlayers:value})
+        this.setState({numOfPlayers:numPVal})
     }
 
     ratingFilter(){
         let ratingVal = this.refs.selectedAvgRating.value
-        this.setState({rating:value})
+        this.setState({rating:ratingVal})
     }
 
+    getMyGameList(){
+
+        let query = this.makeQuery()
+        console.log(query)
+        axios.post(`/api/games?${ query }`).then( res => {
+            console.log(res.data)
+            this.setState({
+              gamesToDisplay: res.data
+            })
+          })
+      }   
+    
+      makeQuery(){
+        let obj = {
+            playingTime: this.state.playingTime,
+            players: this.state.numOfPlayers,
+            averageRating: this.state.rating
+        }
+        let newSearch = new URLSearchParams()
+        for (let prop in obj){
+          newSearch.append(prop, obj[prop])
+        }
+        console.log(newSearch)
+        return newSearch.toString()
+      }
 
     render() {
+        let games = this.state.gamesToDisplay.map((game, i) => {
+            return(
+                <div>
+                    {game.name}
+                </div>
+            )
+        })
         return (
           <div className="">
           <h1>Tabletop Game Finder</h1>
@@ -73,19 +106,28 @@ class Selectors extends Component{
                   <option value="7">+7</option>
                   <option value="8">+8</option>
                 </select>
-    
                 <br/>
+                <br/>
+                
                 <button className='go-btn btn'
-                        onClick={ this.getMyGameList }>
-                  Find Me Some Games To Play!
+                onClick={ this.getMyGameList }>
+                Find Me Some Games To Play!
                 </button>
-                <br/>
+
               </div> 
-              <p></p>
             </div>
+            {games}
           </div>
         );
     }
+}
+
+function makeQuery( obj){
+    let newSearch = new URLSearchParams()
+    for (let prop in obj){
+      newSearch.append(prop, obj[prop])
+    }
+    return newSearch.toString()
 }
 
 export default Selectors;

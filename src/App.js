@@ -11,30 +11,14 @@ class App extends Component {
 
     this.state = {
       filterValues: [],
-      gamesToDisplay: [],
 
     }
-    this.getMyGameList = this.getMyGameList.bind( this );
+    // this.getMyGameList = this.getMyGameList.bind(this);
   }
 
   componentDidMount(){
     axios.get('/api/games').then(res => {
-      console.log(res);
     })
-  }
-
-
-
-  getMyGameList(){
-    axios.get('/api/games').then( res => {
-        this.setState({
-          gamesToDisplay: res.data
-        })
-      })
-  }   
-    
-  saveGame(){
-
   }
 
   deleteGame(){
@@ -44,7 +28,9 @@ class App extends Component {
   render(){
     return(
       <div className="App">
-        <Selectors />
+        <Selectors getMyGameList = {this.getMyGameList}/>
+        <br/>
+        
       </div>
     )
   }
