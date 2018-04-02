@@ -16,7 +16,6 @@ class Selectors extends Component{
 
     timeFilter(){
         let timeVal = this.refs.selectedPlayTime.value
-
         this.setState({playingTime:timeVal})
     }
 
@@ -31,7 +30,6 @@ class Selectors extends Component{
     }
 
     getMyGameList(){
-
         let query = this.makeQuery()
         console.log(query)
         axios.post(`/api/games?${ query }`).then( res => {
@@ -41,8 +39,12 @@ class Selectors extends Component{
             })
           })
       }   
+
+    resetGameList(){
+
+    }  
     
-      makeQuery(){
+    makeQuery(){
         let obj = {
             playingTime: this.state.playingTime,
             players: this.state.numOfPlayers,
@@ -52,7 +54,7 @@ class Selectors extends Component{
         for (let prop in obj){
           newSearch.append(prop, obj[prop])
         }
-        console.log(newSearch)
+
         return newSearch.toString()
       }
 
@@ -73,7 +75,7 @@ class Selectors extends Component{
                 <select onChange={() => this.timeFilter() }
                         ref='selectedPlayTime'
                         className='btn-sp'
-                        value="">
+                        value={this.state.playingTime}>
                   <option value="" disabled>Filter by play time</option>
                   <option value="15">15 min or less</option>
                   <option value="30">30 min or less</option>
@@ -85,7 +87,7 @@ class Selectors extends Component{
                 <select onChange={() => this.numPlyrFilter() }
                         ref='selectedNumPlyrs'
                         className='btn-sp'
-                        value="">
+                        value={this.state.numOfPlayers}>
                   <option value="" disabled>How many players?</option>
                   <option value="1">One</option>
                   <option value="2">Two</option>
@@ -98,7 +100,7 @@ class Selectors extends Component{
                 <select onChange={() => this.ratingFilter() }
                         ref='selectedAvgRating'
                         className='btn-sp'
-                        value="">
+                        value={this.state.rating}>
                   <option value="" disabled>Avg. game rating</option>
                   <option value="4">+4</option>
                   <option value="5">+5</option>
@@ -108,15 +110,27 @@ class Selectors extends Component{
                 </select>
                 <br/>
                 <br/>
-                
-                <button className='go-btn btn'
-                onClick={ this.getMyGameList }>
-                Find Me Some Games To Play!
-                </button>
 
+                <div className="bttm-btns">
+                    <button className='go-btn'
+                            onClick={ this.getMyGameList }>
+                        Find Me Some Games To Play!
+                    </button>
+                    <button className='reset-btn'
+                            onClick={ this.resetGameList }>
+                        Reset game list
+                    </button>
+                </div>
+              
               </div> 
             </div>
-            {games}
+            
+            <div className="game-list">
+                <p className="list-title">Here are some games you should try!</p>
+                <br/>
+                {games}
+            </div>   
+          
           </div>
         );
     }

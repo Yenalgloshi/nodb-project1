@@ -1,8 +1,6 @@
 .App {
   background-color: rgba(128, 128, 128, 0.453);
   text-align: center;
-  
-  
 }
 
 .App-logo {
@@ -28,4 +26,52 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.btn-sp {
+  height: 30px;
+  padding: 0px 10px;
+  border-radius: 20px;
+  border: none;
+  background: rgb(236, 237, 238);
+  color: #323231;
+  margin-top: 1px;
+  margin-left: 30px;
+}
+
+.go-btn {
+  height: 50px;
+  width: 500px;
+  padding: 0px 10px;
+  border-radius: 20px;
+  border: none;
+  background: rgb(236, 237, 238);
+  color: #323231;
+  margin: 20px;
+  font-size: 25px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.reset-btn {
+  border-radius: 20px;
+  background: rgb(236, 237, 238);
+  
+}
+
+.game-list {
+  background-color: rgba(128, 128, 128, 0.453);
+  text-align: left;
+  padding: 10px 30px 40px 30px;
+}
+
+h1 {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-stretch: extra-expanded;
+}
+
+.list-title {
+  text-align: center;
+  font-size: 25px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
-
 import Selectors from './Selectors';
 
 class App extends Component {
@@ -34,9 +33,6 @@ class App extends Component {
       </div>
     )
   }
-
-    
 }
-
 
 export default App;
