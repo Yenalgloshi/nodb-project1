@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import Selectors from './Selectors';
+import Image from './Image';
 
 class App extends Component {
 
@@ -28,6 +29,7 @@ class App extends Component {
     return(
       <div className="App">
         <Selectors getMyGameList = {this.getMyGameList}/>
+        <Image myImage={ "/images/tabletop.jpg" } />
         <br/>
         
       </div>

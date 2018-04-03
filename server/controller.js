@@ -10,7 +10,7 @@ module.exports = {
     read: ( req, res ) => { 
       axios.get('https://bgg-json.azurewebsites.net/collection/edwalter').then(response => {
         allGames = response.data
-        console.log(allGames)
+        // console.log(allGames)
         res.send(allGames)
       })
     }, 
